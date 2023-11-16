@@ -1,164 +1,76 @@
-// const block=document.querySelectorAll(".box")
-// console.log(block)
+const block = document.querySelectorAll(".box");
+console.log(block);
 
-// var combinations=[
-//     [0,1,2],
-//     [3,4,5],
-//     [6,7,8],
-//     [0,3,6],
-//     [1,4,7],
-//     [2,5,8],
-//     [0,4,8],
-//     [2,4,6]
-// ];
-
-// var x_turns=[];
-// var o_turns=[];
-// var click=0;
-// var Wongame=0;
-
-// const result=document.getElementById("result");
-// const message=document.getElementById("message");
-// const button=document.getElementById("button");
-
-// block.forEach(box=>{
-//     console.log(box);
-//     box.onclick=handleClick;
-// });
-
-// function handleClick(e){
-//     console.log("e",e)
-//     var get_id=e.target.id;
-
-//     var texttobeinserted=document.createElement("p");
-//     block[get_id-1].append(texttobeinserted);
-
-//     if(click%2==0){
-//         x_turns.push(get_id-1);
-//         texttobeinserted.innerHTML="X";
-//         texttobeinserted.style.color='red';
-//         result(combinations,x_turns,"X");
-//     }else{
-//         o_turns.push(get_id-1);
-//         texttobeinserted.innerHTML="O";
-//         texttobeinserted.style.color='red';
-//         result(combinations,o_turns,"O");
-//     }
-//     click++;
-//     if(click==9){
-//         result.style.visibility="visible";
-//         message.innerHTML="It's a tie!";
-//     }
-
-// }
-
-// function end(combinations,turns,player){
-//     var answer=[];
-//     var count=0;
-//     for(var i=0; i<combinations.length; i++){
-//         if(Array.isArray(combinations[i])){
-//             end(combinations,turns,player);
-//         }else{
-//             if(turns.includes(combinations[i])){
-//                 answer.push(true);
-//                 count++;
-//             }else{
-//                 answer.push(false);
-//             }
-//         }
-//     }
-//     if(answer.every((answer)=>answer==true) && count>2){
-//         result.style.visibility="visible";
-//         message.innerHTML=`${player} won the game!`;
-//     }
-// }
-
-// button.onclick=()=>{
-//     window.location.reload();
-// }
-
-
-
-
-const block=document.querySelectorAll(".box")
-console.log(block)
-
-var combinations=[
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
+var combinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
 ];
 
-var x_turns=[];
-var o_turns=[];
-var click=0;
-var Wongame=0;
+var x_turns = [];
+var o_turns = [];
+var click = 0;
 
-const result=document.getElementById("result");
-const message=document.getElementById("message");
-const button=document.getElementById("button");
+const result = document.getElementById("result");
+const message = document.getElementById("message");
+const button = document.getElementById("button");
 
-block.forEach(box=>{
+block.forEach(box => {
     console.log(box);
-    box.onclick=handleClick;
+    box.onclick = handleClick;
 });
 
-function handleClick(e){
-    console.log("e",e)
-    var get_id=e.target.id;
+function handleClick(e) {
+    console.log("e", e);
+    var get_id = e.target.id;
 
-    var texttobeinserted=document.createElement("p");
-    block[get_id-1].append(texttobeinserted);
+    var texttobeinserted = document.createElement("p");
+    block[get_id - 1].append(texttobeinserted);
 
-    if(click%2==0){
-        x_turns.push(get_id-1);
-        texttobeinserted.innerHTML="X";
-        texttobeinserted.style.color='red';
-        result1(combinations,x_turns,"X");
-    }else if(click%2!=0){
-        o_turns.push(get_id-1);
-        texttobeinserted.innerHTML="O";
-        texttobeinserted.style.color='red';
-        result1(combinations,o_turns,"O");
+    if (click % 2 === 0) {
+        x_turns.push(get_id - 1);
+        texttobeinserted.textContent = "X";
+        texttobeinserted.style.color = '#FAB201';
+        result1(combinations, x_turns, "X");
+    } else {
+        o_turns.push(get_id - 1);
+        texttobeinserted.textContent = "O";
+        texttobeinserted.style.color = '#FAB201';
+        result1(combinations, o_turns, "O");
     }
-    
-    if(click==8){
-        result.style.visibility="visible";
-        message.innerHTML="It's a tie!";
+    click++;
+    if (click === 9) {
+        result.style.visibility = "visible";
+        message.innerHTML = "It's a tie!";
     }
-    click++
 }
 
-function result1(combinations,turns,player){
-    var answer=[];
-    var count=0;
-    for(var i=0; i<combinations.length; i++){
-        if(Array.isArray(combinations[i])){
-            result(combinations,turns,player);
-        }else{
-            if(turns.includes(combinations[i])){
+function result1(combinations, turns, player) {
+    var answer = [];
+    var count = 0;
+    for (var i = 0; i < combinations.length; i++) {
+        if (Array.isArray(combinations[i])) {
+            result1(combinations[i], turns, player);
+        } else {
+            if (turns.includes(combinations[i])) {
                 answer.push(true);
                 count++;
-            }else{
+            } else {
                 answer.push(false);
             }
         }
     }
-    if(answer.every((answer)=>answer==true) && count>2){
-        result.style.visibility="visible";
-        message.innerHTML=`${player} won the game!`;
+    if (answer.every((ans) => ans === true) && count > 2) {
+        result.style.visibility = "visible";
+        message.innerHTML = `${player} won the game!`;
     }
 }
 
-button.onclick=()=>{
+button.onclick = () => {
     window.location.reload();
-}
-
-
-
-
+};
